@@ -1,4 +1,4 @@
-## React blog font-end
+## React Blog Font-end
 
 一个博客系统的前端实现，基于 create-react-app, antd.
 
