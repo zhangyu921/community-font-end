@@ -25,7 +25,10 @@ class App extends Component {
           <Blog/>
         </Content>
         <Footer/>
-        <BackTop/>
+        <BackTop style={{
+          right: '3%',
+          bottom: '3%'
+        }}/>
       </Layout>
     )
   }
