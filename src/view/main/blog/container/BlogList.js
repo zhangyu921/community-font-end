@@ -2,41 +2,54 @@ import React, { Component } from 'react'
 import { Card, Pagination } from 'antd'
 import axios from 'axios'
 import BlogListItem from '../conponent/BlogListItem'
+import mirror, { connect, actions } from 'mirrorx'
 
-export class BlogList extends Component {
-  constructor (p) {
-    super(p)
-    this.state = {
-      currentPage: 1,
-      pageSize: 10,
-      total: 10,
-      blogArr: [],
-      isLoading: true
+mirror.model({
+  name: 'blogList',
+  initialState: {
+    currentPage: 1,
+    pageSize: 10,
+    total: 10,
+    blogArr: [],
+    isLoading: true
+  },
+  reducers: {
+    request (state) {return {...state, isLoading: true}},
+    receive (state, data) {
+      return {
+        ...state,
+        isLoading: false,
+        blogArr: data.data,
+        total: data.count,
+        currentPage: data.page,
+        pageSize: data.pageSize,
+      }
+    }
+  },
+  effects: {
+    async fetchListData (page, pageSize) {
+      actions.blogList.request()
+      await axios.get('/topic', {params: {page, pageSize}})
+        .then(res => {
+          actions.blogList.receive(res.data)
+        })
     }
   }
 
-  fetchListData = (page, pageSize) => {
-    this.setState({isLoading: true})
-    axios.get('/topic', {params: {page, pageSize}})
-      .then(res => {
-        this.setState({
-          blogArr: res.data.data,
-          currentPage: parseInt(res.data.page),
-          total: parseInt(res.data.count),
-          isLoading: false
-        })
-      })
-  }
+})
+
+class BlogList extends Component {
 
   componentDidMount () {
-    this.fetchListData(1)
+    actions.blogList.fetchListData(1, this.props.pageSize)
   }
 
   onPageChange = page => {
-    this.fetchListData(page, this.state.pageSize)
+    actions.blogList.fetchListData(page, this.props.pageSize)
   }
 
   render () {
+    console.log(this.props.blogList)
     return (
       <div style={{
         display: 'flex',
@@ -45,28 +58,32 @@ export class BlogList extends Component {
         marginTop: -10
       }}>
         {do {
-          if (this.state.isLoading) {
+          if (this.props.isLoading) {
             <Card loading={true} style={{width: '100%'}}/>
           }
           else {
-            this.state.blogArr.map(item => (
+            this.props.blogArr.map(item => (
               <BlogListItem
                 _id={item._id}
                 title={item.title}
                 content={item.content}
-                isLoading={this.state.isLoading}
+                isLoading={this.props.isLoading}
               />
             ))
           }
         }}
         <Pagination
           style={{marginTop: 40}}
-          current={this.state.currentPage}
-          total={this.state.total}
+          current={this.props.currentPage}
+          total={this.props.total}
           onChange={this.onPageChange}
         />
       </div>
     )
   }
 }
+
+export default connect(state => {
+  return state.blogList
+})(BlogList)
 

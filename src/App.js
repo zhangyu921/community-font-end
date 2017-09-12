@@ -9,8 +9,8 @@ import { Redirect, Route } from 'mirrorx'
 
 axios.defaults.baseURL = process.env.NODE_ENV === 'production'
   ? 'http://zhangyu.website/api/v1'
-  // : 'http://127.0.0.1:8082/api/v1'
-  : 'http://zhangyu.website/api/v1'
+  : 'http://127.0.0.1:8082/api/v1'
+  // : 'http://zhangyu.website/api/v1'
 
 const {Content, Footer} = Layout
 
