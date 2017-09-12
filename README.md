@@ -6,5 +6,5 @@
 
 试用了 mirrorx，感觉还是很好用的。
 
-[x] 使用Mirror
+- [x] 使用Mirror
 
