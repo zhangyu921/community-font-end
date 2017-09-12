@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Button, Layout, Menu, Modal } from 'antd'
-import { Link } from 'react-router-dom'
+import { Link } from 'mirrorx'
 // import {LoginButton} from '../login/index'
 
 export default class Header extends Component {

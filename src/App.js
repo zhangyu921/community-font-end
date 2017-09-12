@@ -4,7 +4,8 @@ import Header from './view/header'
 import BreadCrumb from './view/breadcrumb'
 import Blog from './view/main/blog'
 import axios from 'axios'
-import { Redirect, Route } from 'react-router-dom'
+// import { Redirect, Route } from 'react-router-dom'
+import { Redirect, Route } from 'mirrorx'
 
 axios.defaults.baseURL = process.env.NODE_ENV === 'production'
   ? 'http://zhangyu.website/api/v1'
@@ -18,7 +19,7 @@ class App extends Component {
     return (
       <Layout style={{minHeight: document.body.clientHeight}}>
         <Header/>
-        <Content style={{margin: '0 16px'}}>
+        <Content style={{margin: '0 5%'}}>
           <BreadCrumb/>
           <Route exact path="/" render={() => <Redirect to="/blog"/>}/>
           <Blog/>

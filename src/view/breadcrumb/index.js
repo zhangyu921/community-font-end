@@ -1,6 +1,6 @@
 import React from 'react'
 import { Breadcrumb } from 'antd'
-import { Link, withRouter } from 'react-router-dom'
+import { Link, withRouter } from 'mirrorx'
 
 const breadcrumbNameMap = {
   '/blog': 'blog',

@@ -1,14 +1,19 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+// import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
 import registerServiceWorker from './registerServiceWorker'
-import { HashRouter } from 'react-router-dom'
+// import { HashRouter } from 'react-router-dom'
+import mirror, { render, Router } from 'mirrorx'
 
-ReactDOM.render(
-  <HashRouter>
+mirror.defaults({
+  historyMode: 'hash'
+})
+
+render(
+  <Router>
     <App/>
-  </HashRouter>,
+  </Router>,
   document.getElementById('root')
 )
 registerServiceWorker()

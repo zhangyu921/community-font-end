@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route } from 'react-router-dom'
+import { Route } from 'mirrorx'
 import { BlogList } from './container/BlogList'
 import BlogDetail from './container/BlogDetail'
 

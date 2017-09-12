@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card } from 'antd'
-import { Link } from 'react-router-dom'
+import { Link } from 'mirrorx'
 import markdownIt from 'markdown-it'
 
 const md = new markdownIt()
